@@ -18,7 +18,7 @@ class _LoginState extends State<Login> {
   //TODO: Remove function when auth is implemented
   void _enterMockValues() {
     setState(() {
-      if (usernameController.text == '') {
+      if (usernameController.text.isEmpty) {
         usernameController.text = 'Caceres@gmail.com';
         passwordController.text = 'Caceres123';
       } else {
@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
     String mockUsername = 'Caceres@gmail.com';
     String mockPassword = 'Caceres123';
 
-    if (inputUsername == '' || inputPassword == '') {
+    if (inputUsername.isEmpty || inputPassword.isEmpty) {
       _showEmptyInputDialog();
       return;
     }
