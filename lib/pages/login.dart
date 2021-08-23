@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/register.dart';
+import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -28,38 +29,20 @@ class _LoginState extends State<Login> {
   }
 
   void _showEmptyInputDialog() {
-    showDialog(
+    oneOptionDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Existen campos vacíos'),
-        content: const Text('Por favor, completar todos los campos.'),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Volver a intentar')),
-          ),
-        ],
-      ),
+      title: 'Existen campos vacíos',
+      content: 'Por favor, completar todos los campos.',
+      action: 'Volver a intentar',
     );
   }
 
   void _showIncorrectInputDialog() {
-    showDialog(
+    oneOptionDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Datos Incorrectos'),
-        content: const Text('Usuario y/o Contraseña incorrectos.'),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Volver a intentar')),
-          ),
-        ],
-      ),
+      title: 'Datos Incorrectos',
+      content: 'Usuario y/o Contraseña incorrectos.',
+      action: 'Volver a intentar',
     );
   }
 
