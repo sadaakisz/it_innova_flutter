@@ -33,7 +33,6 @@ class _LoginState extends State<Login> {
       context: context,
       title: 'Existen campos vacíos',
       content: 'Por favor, completar todos los campos.',
-      action: 'Volver a intentar',
     );
   }
 
@@ -42,7 +41,6 @@ class _LoginState extends State<Login> {
       context: context,
       title: 'Datos Incorrectos',
       content: 'Usuario y/o Contraseña incorrectos.',
-      action: 'Volver a intentar',
     );
   }
 

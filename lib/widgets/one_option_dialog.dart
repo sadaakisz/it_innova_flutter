@@ -4,7 +4,7 @@ Future oneOptionDialog(
     {required BuildContext context,
     required String title,
     required String content,
-    required String action}) {
+    String action = 'Volver a intentar'}) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
