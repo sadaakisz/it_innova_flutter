@@ -85,7 +85,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan.shade100,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15.0),
         child: Form(

@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'IT Innova',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
+        scaffoldBackgroundColor: Colors.cyan.shade100,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:
