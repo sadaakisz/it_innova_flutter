@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:it_innova_flutter/pages/login.dart';
+import 'package:it_innova_flutter/pages/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
                   MaterialStateProperty.all<Color>(Colors.blueGrey.shade800)),
         ),
       ),
-      home: Login(),
+      home: Home(),
     );
   }
 }
