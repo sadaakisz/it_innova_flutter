@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
     setState(() {
       if (usernameController.text.isEmpty) {
         usernameController.text = 'Caceres@gmail.com';
-        passwordController.text = 'Caceres123';
+        passwordController.text = '*Caceres123';
       } else {
         usernameController.clear();
         passwordController.clear();
@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
     String inputPassword = passwordController.text;
 
     String mockUsername = 'Caceres@gmail.com';
-    String mockPassword = 'Caceres123';
+    String mockPassword = '*Caceres123';
 
     if (inputUsername.isEmpty || inputPassword.isEmpty) {
       _showEmptyInputDialog();

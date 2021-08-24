@@ -25,8 +25,8 @@ class _RegisterState extends State<Register> {
         nameController.text = 'Mario';
         surnameController.text = 'Caceres';
         emailController.text = 'Caceres@gmail.com';
-        passwordController.text = 'Caceres123';
-        confirmPasswordController.text = 'Caceres123';
+        passwordController.text = '*Caceres123';
+        confirmPasswordController.text = '*Caceres123';
       } else {
         nameController.clear();
         surnameController.clear();
@@ -137,12 +137,28 @@ class _RegisterState extends State<Register> {
                         controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(hintText: 'Contraseña'),
+                        validator: (value) {
+                          bool validPass = RegExp(
+                                  "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}")
+                              .hasMatch(value!);
+                          if (value.isEmpty || !validPass) {
+                            return 'Usa 8 o más caracteres con una combinación de\nletras mayúsculas y mínusculas, números y símbolos.';
+                          }
+                        },
                       ),
                       TextFormField(
                         controller: confirmPasswordController,
                         obscureText: true,
                         decoration:
                             InputDecoration(hintText: 'Confirmar Contraseña'),
+                        validator: (value) {
+                          bool validPass = RegExp(
+                                  "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}")
+                              .hasMatch(value!);
+                          if (value.isEmpty || !validPass) {
+                            return 'Usa 8 o más caracteres con una combinación de\nletras mayúsculas y mínusculas, números y símbolos.';
+                          }
+                        },
                       ),
                       SizedBox(height: height * 0.02),
                       SizedBox(
@@ -150,7 +166,7 @@ class _RegisterState extends State<Register> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            _register();
+                            if (_formKey.currentState!.validate()) _register();
                           },
                           child: const Text('REGISTRARSE'),
                         ),
