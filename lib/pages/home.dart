@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/heart_rate.dart';
 import 'package:it_innova_flutter/pages/history.dart';
 import 'package:it_innova_flutter/pages/profile.dart';
 import 'package:it_innova_flutter/pages/settings.dart';
@@ -19,9 +20,7 @@ class _HomeState extends State<Home> {
     'Ubicación'
   ];
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-    ),
+    HeartRate(),
     History(),
     Profile(),
     Settings(),
