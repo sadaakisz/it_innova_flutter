@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/login.dart';
+import 'package:it_innova_flutter/widgets/two_options_dialog.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -24,6 +26,13 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
+  void _logout() {
+    //TODO: Remove token from SharedPrefs.
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (BuildContext context) => Login()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +46,10 @@ class _ProfileState extends State<Profile> {
           Center(
             child: GestureDetector(
               //TODO: Show sign out dialog
-              onTap: () {},
+              onTap: () => twoOptionsDialog(
+                  context: context,
+                  title: '¿Desea salir de la aplicación?',
+                  action: _logout),
               child: Padding(
                 padding: const EdgeInsets.only(right: 12.0),
                 child: Text(
@@ -100,6 +112,7 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       ElevatedButton(
+                        //TODO: Implement form submission
                         onPressed: () {},
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -108,6 +121,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       ElevatedButton(
+                        //TODO: Implement form dismiss (revert)
                         onPressed: () {},
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
