@@ -37,13 +37,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _pageTitles[_selectedIndex],
-          style: TextStyle(color: Colors.black87),
-        ),
-        iconTheme: IconThemeData(color: Colors.black87),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
