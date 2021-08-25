@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
     'Mi Perfil',
     'Ubicación'
   ];
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
     ),
