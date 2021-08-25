@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/history.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,13 +10,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  static const List<String> _pageTitles = <String>[
+    'Ritmo Cardiaco',
+    'Historial Ritmo Cardiaco',
+    'Mi Perfil',
+    'Ubicación'
+  ];
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
     ),
-    Text(
-      'Index 1: Business',
-    ),
+    History(),
     Text(
       'Index 2: School',
     ),
@@ -32,6 +37,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          _pageTitles[_selectedIndex],
+          style: TextStyle(color: Colors.black87),
+        ),
+        iconTheme: IconThemeData(color: Colors.black87),
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
