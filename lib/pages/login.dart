@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -74,9 +75,9 @@ class _LoginState extends State<Login> {
       return;
     }
     if (inputUsername == mockUsername && inputPassword == mockPassword) {
-      /*Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
-      );*/
+      );
     } else {
       _showIncorrectInputDialog();
     }
