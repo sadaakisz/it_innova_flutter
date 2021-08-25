@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/history.dart';
+import 'package:it_innova_flutter/pages/settings.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,9 +25,7 @@ class _HomeState extends State<Home> {
     Text(
       'Index 2: School',
     ),
-    Text(
-      'Index 3: Wark',
-    ),
+    Settings(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -37,9 +36,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: SafeArea(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
