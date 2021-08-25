@@ -15,7 +15,10 @@ Future twoOptionsDialog({
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: TextButton(
-            onPressed: () => action(),
+            onPressed: () {
+              Navigator.of(context).pop();
+              action();
+            },
             child: Text(accept),
           ),
         ),
