@@ -50,11 +50,16 @@ class _ProfileState extends State<Profile> {
                   context: context,
                   title: '¿Desea salir de la aplicación?',
                   action: _logout),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: Text(
-                  'Cerrar Sesión',
-                  style: TextStyle(color: Colors.black87),
+              child: Container(
+                color: Colors.cyan.shade100,
+                alignment: Alignment.center,
+                height: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Text(
+                    'Cerrar Sesión',
+                    style: TextStyle(color: Colors.black87),
+                  ),
                 ),
               ),
             ),
