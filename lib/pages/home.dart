@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/history.dart';
+import 'package:it_innova_flutter/pages/profile.dart';
 import 'package:it_innova_flutter/pages/settings.dart';
 
 class Home extends StatefulWidget {
@@ -22,9 +23,7 @@ class _HomeState extends State<Home> {
       'Index 0: Home',
     ),
     History(),
-    Text(
-      'Index 2: School',
-    ),
+    Profile(),
     Settings(),
   ];
   void _onItemTapped(int index) {
