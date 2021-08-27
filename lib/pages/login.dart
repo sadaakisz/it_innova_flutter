@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/register.dart';
+import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -16,9 +18,9 @@ class _LoginState extends State<Login> {
   //TODO: Remove function when auth is implemented
   void _enterMockValues() {
     setState(() {
-      if (usernameController.text == '') {
+      if (usernameController.text.isEmpty) {
         usernameController.text = 'Caceres@gmail.com';
-        passwordController.text = 'Caceres123';
+        passwordController.text = '*Caceres123';
       } else {
         usernameController.clear();
         passwordController.clear();
@@ -27,38 +29,18 @@ class _LoginState extends State<Login> {
   }
 
   void _showEmptyInputDialog() {
-    showDialog(
+    oneOptionDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Existen campos vacíos'),
-        content: const Text('Por favor, completar todos los campos.'),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Volver a intentar')),
-          ),
-        ],
-      ),
+      title: 'Existen campos vacíos',
+      content: 'Por favor, completar todos los campos.',
     );
   }
 
   void _showIncorrectInputDialog() {
-    showDialog(
+    oneOptionDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Datos Incorrectos'),
-        content: const Text('Usuario y/o Contraseña incorrectos.'),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Volver a intentar')),
-          ),
-        ],
-      ),
+      title: 'Datos Incorrectos',
+      content: 'Usuario y/o Contraseña incorrectos.',
     );
   }
 
@@ -67,9 +49,9 @@ class _LoginState extends State<Login> {
     String inputPassword = passwordController.text;
 
     String mockUsername = 'Caceres@gmail.com';
-    String mockPassword = 'Caceres123';
+    String mockPassword = '*Caceres123';
 
-    if (inputUsername == '' || inputPassword == '') {
+    if (inputUsername.isEmpty || inputPassword.isEmpty) {
       _showEmptyInputDialog();
       return;
     }
@@ -85,7 +67,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan.shade100,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15.0),
         child: Form(
@@ -155,7 +136,12 @@ class _LoginState extends State<Login> {
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Register()),
+                          );
+                        },
                         child: const Text('REGISTRARSE'),
                       ),
                     ),
