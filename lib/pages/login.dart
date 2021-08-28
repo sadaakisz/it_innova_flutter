@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/home.dart';
+import 'package:it_innova_flutter/pages/recover_password.dart';
 import 'package:it_innova_flutter/pages/register.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
@@ -100,15 +101,26 @@ class _LoginState extends State<Login> {
                       obscureText: true,
                       decoration: InputDecoration(hintText: 'Password'),
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '¿Olvidaste tu contraseña?',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
+                    GestureDetector(
+                      //
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  RecoverPassword()),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 50,
+                        color: Colors.cyan.shade100,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '¿Olvidaste tu contraseña?',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       ),

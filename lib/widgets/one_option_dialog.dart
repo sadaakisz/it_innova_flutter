@@ -4,7 +4,8 @@ Future oneOptionDialog(
     {required BuildContext context,
     required String title,
     required String content,
-    String action = 'Volver a intentar'}) {
+    String action = 'Volver a intentar',
+    VoidCallback? onDismiss}) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
@@ -14,7 +15,9 @@ Future oneOptionDialog(
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                onDismiss == null ? Navigator.of(context).pop() : onDismiss();
+              },
               child: Text(action)),
         ),
       ],
