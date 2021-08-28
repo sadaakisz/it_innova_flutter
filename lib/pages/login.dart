@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/home.dart';
 import 'package:it_innova_flutter/pages/register.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
@@ -56,9 +57,9 @@ class _LoginState extends State<Login> {
       return;
     }
     if (inputUsername == mockUsername && inputPassword == mockPassword) {
-      /*Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
-      );*/
+      );
     } else {
       _showIncorrectInputDialog();
     }
