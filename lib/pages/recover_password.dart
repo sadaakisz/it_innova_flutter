@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/update_password.dart';
+import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class RecoverPassword extends StatefulWidget {
   const RecoverPassword({Key? key}) : super(key: key);
@@ -10,14 +12,63 @@ class RecoverPassword extends StatefulWidget {
 class _RecoverPasswordState extends State<RecoverPassword> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
+
+  //TODO: Remove function when auth is implemented
+  void _enterMockValues() {
+    setState(() {
+      if (emailController.text.isEmpty) {
+        emailController.text = 'Caceres@gmail.com';
+      } else {
+        emailController.clear();
+      }
+    });
+  }
+
+  void _showEmptyInputDialog() {
+    oneOptionDialog(
+      context: context,
+      title: 'Existen campos vacíos',
+      content: 'Por favor, completar todos los campos.',
+    );
+  }
+
+  void _showIncorrectEmailDialog() {
+    oneOptionDialog(
+      context: context,
+      title: 'Correo Inválido',
+      content: 'El correo ingresado no se encuentra registrado.',
+    );
+  }
+
+  void _sendRecoveryEmail() {
+    String inputEmail = emailController.text;
+
+    String mockEmail = 'Caceres@gmail.com';
+
+    if (inputEmail.isEmpty) {
+      _showEmptyInputDialog();
+      return;
+    }
+    if (inputEmail == mockEmail) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => UpdatePassword()),
+      );
+    } else {
+      _showIncorrectEmailDialog();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Recuperar contraseña',
-          style: TextStyle(color: Colors.black87),
+        title: GestureDetector(
+          onTap: () => _enterMockValues(),
+          child: Text(
+            'Recuperar contraseña',
+            style: TextStyle(color: Colors.black87),
+          ),
         ),
         iconTheme: IconThemeData(color: Colors.black87),
       ),
@@ -45,8 +96,8 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                           height: 50,
                           child: ElevatedButton(
                             //TODO: Implementar
-                            onPressed: () {},
-                            child: const Text('ENVIAR CORREO DE RECUPERACIÓN'),
+                            onPressed: () => _sendRecoveryEmail(),
+                            child: const Text('Enviar correo de recuperación'),
                           ),
                         ),
                       ],
