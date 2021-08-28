@@ -40,6 +40,21 @@ class _RecoverPasswordState extends State<RecoverPassword> {
     );
   }
 
+  void _showRecoveryEmailSent() {
+    oneOptionDialog(
+      context: context,
+      title: 'Código Enviado',
+      content: 'Se ha enviado un código al correo enviado.',
+      action: 'Aceptar',
+      onDismiss: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (BuildContext context) => UpdatePassword()),
+        );
+      },
+    );
+  }
+
   void _sendRecoveryEmail() {
     String inputEmail = emailController.text;
 
@@ -50,9 +65,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
       return;
     }
     if (inputEmail == mockEmail) {
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) => UpdatePassword()),
-      );
+      _showRecoveryEmailSent();
     } else {
       _showIncorrectEmailDialog();
     }
@@ -95,7 +108,6 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                           width: double.infinity,
                           height: 50,
                           child: ElevatedButton(
-                            //TODO: Implementar
                             onPressed: () => _sendRecoveryEmail(),
                             child: const Text('Enviar correo de recuperación'),
                           ),
