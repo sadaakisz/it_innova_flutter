@@ -66,6 +66,8 @@ class _ProfileState extends State<Profile> {
       _showWeakPasswordDialog();
       return;
     }
+
+    //TODO: Update password
   }
 
   void _logout() {
