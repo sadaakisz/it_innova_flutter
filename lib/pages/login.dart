@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/home.dart';
+import 'package:it_innova_flutter/pages/register.dart';
+import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
