@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/login.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class UpdatePassword extends StatefulWidget {
@@ -11,7 +12,7 @@ class UpdatePassword extends StatefulWidget {
 class _UpdatePasswordState extends State<UpdatePassword> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController codeController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -19,12 +20,12 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   //TODO: Remove function when auth is implemented
   void _enterMockValues() {
     setState(() {
-      if (emailController.text.isEmpty) {
-        emailController.text = '123498';
+      if (codeController.text.isEmpty) {
+        codeController.text = '123498';
         passwordController.text = '*Caceres123';
         confirmPasswordController.text = '*Caceres123';
       } else {
-        emailController.clear();
+        codeController.clear();
         passwordController.clear();
         confirmPasswordController.clear();
       }
@@ -57,12 +58,26 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     );
   }
 
+  void _showPasswordUpdated() {
+    oneOptionDialog(
+      context: context,
+      title: 'Contraseña Actualizada',
+      content: 'Su contraseña fue actualizada.',
+      action: 'Aceptar',
+      onDismiss: () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (BuildContext context) => Login()),
+        );
+      },
+    );
+  }
+
   void _updatePassword() {
-    String inputEmail = emailController.text;
+    String inputCode = codeController.text;
     String inputPassword = passwordController.text;
     String inputConfirmPassword = confirmPasswordController.text;
 
-    if (inputEmail.isEmpty ||
+    if (inputCode.isEmpty ||
         inputPassword.isEmpty ||
         inputConfirmPassword.isEmpty) {
       _showEmptyInputDialog();
@@ -79,7 +94,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
       _showWeakPasswordDialog();
       return;
     }
-    //TODO: Show dialog Contraseña actualizada
+    _showPasswordUpdated();
   }
 
   @override
@@ -110,7 +125,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       TextFormField(
-                        controller: emailController,
+                        controller: codeController,
                         decoration:
                             InputDecoration(labelText: 'Ingrese el código'),
                       ),
