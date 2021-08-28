@@ -10,6 +10,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -26,6 +28,45 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
+  void _showEmptyInputDialog() {
+    oneOptionDialog(
+      context: context,
+      title: 'Existen campos vacíos',
+      content: 'Por favor, completar todos los campos.',
+    );
+  }
+
+  void _showWeakPasswordDialog() {
+    oneOptionDialog(
+      context: context,
+      title: 'Contraseña débil',
+      content:
+          'Usa 8 o más caracteres con una combinación de\nletras mayúsculas y mínusculas, números y símbolos.',
+    );
+  }
+
+  void _updateProfile() async {
+    String inputName = nameController.text;
+    String inputSurname = surnameController.text;
+    String inputEmail = emailController.text;
+    String inputPassword = passwordController.text;
+
+    if (inputName.isEmpty ||
+        inputSurname.isEmpty ||
+        inputEmail.isEmpty ||
+        inputPassword.isEmpty) {
+      _showEmptyInputDialog();
+      return;
+    }
+    bool validPass =
+        RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}")
+            .hasMatch(inputPassword);
+    if (inputPassword.isEmpty || !validPass) {
+      _showWeakPasswordDialog();
+      return;
+    }
+  }
+
   void _logout() {
     //TODO: Remove token from SharedPrefs.
     Navigator.of(context).pushReplacement(
@@ -36,6 +77,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Mi Perfil',
@@ -81,62 +123,68 @@ class _ProfileState extends State<Profile> {
             ),
             Expanded(
               flex: 3,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  TextFormField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      labelText: 'Nombres:',
-                      labelStyle: labelStyle,
-                    ),
-                  ),
-                  TextFormField(
-                    controller: surnameController,
-                    decoration: InputDecoration(
-                      labelText: 'Apellidos:',
-                      labelStyle: labelStyle,
-                    ),
-                  ),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Contraseña:',
-                      labelStyle: labelStyle,
-                    ),
-                  ),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Correo:',
-                      labelStyle: labelStyle,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      ElevatedButton(
-                        //TODO: Implement form submission
-                        onPressed: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
-                          child: Text('Guardar'),
-                        ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    TextFormField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Nombres:',
+                        labelStyle: labelStyle,
                       ),
-                      ElevatedButton(
-                        //TODO: Implement form dismiss (revert)
-                        onPressed: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
-                          child: Text('Cancelar'),
-                        ),
+                    ),
+                    TextFormField(
+                      controller: surnameController,
+                      decoration: InputDecoration(
+                        labelText: 'Apellidos:',
+                        labelStyle: labelStyle,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Contraseña:',
+                        labelStyle: labelStyle,
+                      ),
+                    ),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Correo:',
+                        labelStyle: labelStyle,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        ElevatedButton(
+                          //TODO: Implement form submission
+                          onPressed: () {
+                            if (_formKey.currentState!.validate())
+                              _updateProfile();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 8.0),
+                            child: Text('Guardar'),
+                          ),
+                        ),
+                        ElevatedButton(
+                          //TODO: Implement form dismiss (revert)
+                          onPressed: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 8.0),
+                            child: Text('Cancelar'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ],
