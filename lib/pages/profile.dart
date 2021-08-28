@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/login.dart';
+import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 import 'package:it_innova_flutter/widgets/two_options_dialog.dart';
 
 class Profile extends StatefulWidget {
