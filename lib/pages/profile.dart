@@ -90,7 +90,6 @@ class _ProfileState extends State<Profile> {
         actions: <Widget>[
           Center(
             child: GestureDetector(
-              //TODO: Show sign out dialog
               onTap: () => twoOptionsDialog(
                   context: context,
                   title: '¿Desea salir de la aplicación?',
