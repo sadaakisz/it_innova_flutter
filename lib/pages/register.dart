@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
@@ -87,11 +86,9 @@ class _RegisterState extends State<Register> {
     }
     if (inputEmail != mockRegisteredEmail) {
       print('Registered!');
-      */
-/*Navigator.of(context).pushReplacement(
+      /*Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
-      );*/ /*
-
+      );*/
     } else {
       _showAlreadyRegisteredDialog();
     }
@@ -185,4 +182,3 @@ class _RegisterState extends State<Register> {
     );
   }
 }
-*/
