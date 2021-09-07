@@ -189,3 +189,6 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 .packages
 .dart_tool/package_config.json
+.packages
+.dart_tool/package_config_subset
+.dart_tool/package_config.json
