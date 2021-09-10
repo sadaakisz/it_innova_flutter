@@ -86,6 +86,7 @@ class _RegisterState extends State<Register> {
     }
     if (inputEmail != mockRegisteredEmail) {
       print('Registered!');
+      Navigator.of(context).pop();
       /*Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
       );*/
