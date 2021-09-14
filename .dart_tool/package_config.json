@@ -50,6 +50,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "convert",
+      "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/convert-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3",
       "packageUri": "lib/",
@@ -62,8 +68,20 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "fixnum",
+      "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/Flutter/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_blue",
+      "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue-0.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -100,6 +118,18 @@
     {
       "name": "path",
       "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "protobuf",
+      "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/protobuf-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///C:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.26.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -164,7 +194,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-07T21:12:46.589101Z",
+  "generated": "2021-09-11T22:11:58.449310Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }
