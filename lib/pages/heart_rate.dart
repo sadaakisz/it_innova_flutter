@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/models/heart_rate_history.dart';
-import 'package:it_innova_flutter/widgets/heart_rate_chart.dart';
+import 'package:it_innova_flutter/pages/select_device.dart';
 import 'package:it_innova_flutter/widgets/heart_rate_indicator.dart';
 
 class HeartRate extends StatefulWidget {
@@ -36,9 +36,24 @@ class _HeartRateState extends State<HeartRate> {
           children: [
             SizedBox(height: width * 0.05),
             HeartRateIndicator(bpm: 89),
-            SizedBox(height: width * 0.1),
-            HeartRateChart(
+            SizedBox(height: width * 0.2),
+            /*HeartRateChart(
               data: _heartRateHistoryList,
+            ),*/
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: width / 10),
+              height: width / 5,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.redAccent,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => SelectDevice()),
+                    );
+                  },
+                  child: Text('Evaluar Ritmo Cardíaco')),
             ),
           ],
         ),
