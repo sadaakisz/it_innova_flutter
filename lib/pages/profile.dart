@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/login.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 import 'package:it_innova_flutter/widgets/two_options_dialog.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -72,9 +73,7 @@ class _ProfileState extends State<Profile> {
 
   void _logout() {
     //TODO: Remove token from SharedPrefs.
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (BuildContext context) => Login()),
-    );
+    pushNewScreen(context, screen: Login(), withNavBar: false);
   }
 
   @override

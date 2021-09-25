@@ -16,7 +16,8 @@ Future oneOptionDialog(
           padding: const EdgeInsets.only(right: 8.0),
           child: TextButton(
               onPressed: () {
-                onDismiss == null ? Navigator.of(context).pop() : onDismiss();
+                Navigator.of(context).pop();
+                if (onDismiss != null) onDismiss();
               },
               child: Text(action)),
         ),
