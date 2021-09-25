@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:it_innova_flutter/services/register_service.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class Register extends StatefulWidget {
@@ -11,9 +13,12 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
 
+  RegisterService registerService = new RegisterService();
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController dniController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -25,12 +30,14 @@ class _RegisterState extends State<Register> {
         nameController.text = 'Mario';
         surnameController.text = 'Caceres';
         emailController.text = 'Caceres@gmail.com';
+        dniController.text = '87654321';
         passwordController.text = '*Caceres123';
         confirmPasswordController.text = '*Caceres123';
       } else {
         nameController.clear();
         surnameController.clear();
         emailController.clear();
+        dniController.clear();
         passwordController.clear();
         confirmPasswordController.clear();
       }
@@ -66,6 +73,7 @@ class _RegisterState extends State<Register> {
     String inputName = nameController.text;
     String inputSurname = surnameController.text;
     String inputEmail = emailController.text;
+    String inputDni = dniController.text;
     String inputPassword = passwordController.text;
     String inputConfirmPassword = confirmPasswordController.text;
 
@@ -75,6 +83,7 @@ class _RegisterState extends State<Register> {
     if (inputName.isEmpty ||
         inputSurname.isEmpty ||
         inputEmail.isEmpty ||
+        inputDni.isEmpty ||
         inputPassword.isEmpty ||
         inputConfirmPassword.isEmpty) {
       _showEmptyInputDialog();
@@ -85,8 +94,12 @@ class _RegisterState extends State<Register> {
       return;
     }
     if (inputEmail != mockRegisteredEmail) {
-      print('Registered!');
-      Navigator.of(context).pop();
+      Response response = await registerService.registerClient(
+          inputName, inputSurname, inputEmail, inputPassword, inputDni);
+      if (response.statusCode == 200) {
+        print('Registered!');
+        Navigator.of(context).pop();
+      }
       /*Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
       );*/
@@ -133,6 +146,10 @@ class _RegisterState extends State<Register> {
                       TextFormField(
                         controller: emailController,
                         decoration: InputDecoration(hintText: 'Correo'),
+                      ),
+                      TextFormField(
+                        controller: dniController,
+                        decoration: InputDecoration(hintText: 'DNI'),
                       ),
                       TextFormField(
                         controller: passwordController,
