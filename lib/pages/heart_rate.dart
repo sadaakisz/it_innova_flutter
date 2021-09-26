@@ -19,9 +19,11 @@ class _HeartRateState extends State<HeartRate> {
 
   _getBpm() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      bpm = prefs.getInt('bpm')!;
-    });
+    if (bpm != prefs.getInt('bpm')) {
+      setState(() {
+        bpm = prefs.getInt('bpm')!;
+      });
+    }
   }
 
   final List<HeartRateHistory> _heartRateHistoryList = [
