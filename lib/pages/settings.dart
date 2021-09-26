@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -9,6 +10,25 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   bool _locationActivated = false;
+
+  _getLocationEnabled() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _locationActivated = prefs.getBool('enabledLocation')!;
+    });
+  }
+
+  _setLocationEnabled(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('enabledLocation', value);
+  }
+
+  @override
+  void initState() {
+    _getLocationEnabled();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +46,7 @@ class _SettingsState extends State<Settings> {
           onChanged: (bool value) {
             setState(() {
               _locationActivated = !_locationActivated;
+              _setLocationEnabled(_locationActivated);
             });
           },
         ),
