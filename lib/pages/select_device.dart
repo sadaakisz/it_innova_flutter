@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:it_innova_flutter/util/json_time.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 import 'package:it_innova_flutter/widgets/two_options_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +27,10 @@ class _SelectDeviceState extends State<SelectDevice> {
 
   setBpmPrefs(value) async {
     prefs = await SharedPreferences.getInstance();
-    if (value != null) await prefs.setInt('bpm', value);
+    if (value != null) {
+      await prefs.setInt('bpm', value);
+      await prefs.setString('bpmTime', JsonTime().getJsonTime());
+    }
   }
 
   void _showConnectedDevice(String deviceName, BluetoothDevice device) {
