@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:it_innova_flutter/pages/heart_rate.dart';
 import 'package:it_innova_flutter/pages/history.dart';
 import 'package:it_innova_flutter/pages/profile.dart';
 import 'package:it_innova_flutter/pages/settings.dart';
+import 'package:it_innova_flutter/util/location.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,6 +17,33 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Timer? timer;
+  bool _locationActivated = false;
+
+  _getLocationEnabled() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _locationActivated = prefs.getBool('enabledLocation')!;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 10), (Timer t) {
+      _getLocationEnabled().whenComplete(() async {
+        if (_locationActivated) {
+          print(await AppLocation().getLatitude());
+          print(await AppLocation().getLongitude());
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
   List<Widget> _buildScreens() {
     return [
       HeartRate(),
