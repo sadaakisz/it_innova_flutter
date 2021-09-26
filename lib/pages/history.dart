@@ -47,7 +47,6 @@ class _HistoryState extends State<History> {
           setState(() {
             _showHeartRate = !_showHeartRate;
           });
-          ;
         },
       ),
     );
