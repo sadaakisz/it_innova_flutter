@@ -23,25 +23,31 @@ class _HomeState extends State<Home> {
   Timer? timer;
   bool _locationActivated = false;
 
+  LocationService locationService = new LocationService();
+
   _getLocationEnabled() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _locationActivated = prefs.getBool('enabledLocation')!;
   }
 
+  void createData() async {
+    var latitude = await AppLocation().getLatitude();
+    var longitude = await AppLocation().getLongitude();
+    var date = JsonTime().getJsonTime();
+    LocationValue locationValue =
+        new LocationValue(latitud: latitude, longitud: longitude, fecha: date);
+    locationService.locationValue = locationValue;
+    await locationService.createData();
+  }
+
   @override
   void initState() {
     super.initState();
-    LocationService locationService = new LocationService();
+
     timer = Timer.periodic(Duration(seconds: 10), (Timer t) {
       _getLocationEnabled().whenComplete(() async {
         if (_locationActivated) {
-          var latitude = await AppLocation().getLatitude();
-          var longitude = await AppLocation().getLongitude();
-          var date = JsonTime().getJsonTime();
-          LocationValue locationValue = new LocationValue(
-              latitud: latitude, longitud: longitude, fecha: date);
-          locationService.locationValue = locationValue;
-          await locationService.createData();
+          createData();
         }
       });
     });
