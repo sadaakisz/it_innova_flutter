@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/models/location_value.dart';
 import 'package:it_innova_flutter/pages/heart_rate.dart';
 import 'package:it_innova_flutter/pages/history.dart';
 import 'package:it_innova_flutter/pages/profile.dart';
 import 'package:it_innova_flutter/pages/settings.dart';
+import 'package:it_innova_flutter/services/location_service.dart';
+import 'package:it_innova_flutter/util/json_time.dart';
 import 'package:it_innova_flutter/util/location.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,19 +23,31 @@ class _HomeState extends State<Home> {
   Timer? timer;
   bool _locationActivated = false;
 
+  LocationService locationService = new LocationService();
+
   _getLocationEnabled() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _locationActivated = prefs.getBool('enabledLocation')!;
   }
 
+  void createData() async {
+    var latitude = await AppLocation().getLatitude();
+    var longitude = await AppLocation().getLongitude();
+    var date = JsonTime().getJsonTime();
+    LocationValue locationValue =
+        new LocationValue(latitud: latitude, longitud: longitude, fecha: date);
+    locationService.locationValue = locationValue;
+    await locationService.createData();
+  }
+
   @override
   void initState() {
     super.initState();
+
     timer = Timer.periodic(Duration(seconds: 10), (Timer t) {
       _getLocationEnabled().whenComplete(() async {
         if (_locationActivated) {
-          print(await AppLocation().getLatitude());
-          print(await AppLocation().getLongitude());
+          createData();
         }
       });
     });
