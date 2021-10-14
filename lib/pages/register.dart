@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:it_innova_flutter/services/register_service.dart';
+import 'package:it_innova_flutter/models/patient.dart';
+import 'package:it_innova_flutter/services/patient_service.dart';
+import 'package:it_innova_flutter/util/json_time.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class Register extends StatefulWidget {
@@ -13,7 +15,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
 
-  RegisterService registerService = new RegisterService();
+  PatientService service = new PatientService();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
@@ -93,19 +95,26 @@ class _RegisterState extends State<Register> {
       _showUnmatchedPasswordsDialog();
       return;
     }
-    if (inputEmail != mockRegisteredEmail) {
-      Response response = await registerService.registerClient(
-          inputName, inputSurname, inputEmail, inputPassword, inputDni);
-      if (response.statusCode == 200) {
-        print('Registered!');
-        Navigator.of(context).pop();
-      }
-      /*Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => Home()),
-      );*/
-    } else {
-      _showAlreadyRegisteredDialog();
+    String now = JsonTime().getJsonTime();
+    Patient patient = new Patient(
+        name: inputName,
+        lastName: inputSurname,
+        email: inputEmail,
+        password: inputPassword,
+        dni: inputDni,
+        dateCreation: now,
+        dateLocation: now);
+    service.patient = patient;
+    //TODO: Handle non 200 status code
+    Response response = await service.createData();
+    if (response.statusCode == 200) {
+      print('Registered!');
+      Navigator.of(context).pop();
     }
+    //TODO: Already registered accounts is not handled in backend
+    /*else {
+      _showAlreadyRegisteredDialog();
+    }*/
   }
 
   @override
