@@ -1,7 +1,7 @@
 class HeartRateHistory {
   HeartRateHistory({required this.bpm, required this.date});
-  late final int bpm;
-  late final String date;
+  late int bpm;
+  late String date;
 
   HeartRateHistory.fromJson(Map<String, dynamic> json) {
     bpm = json['ritmoCardiaco'];
