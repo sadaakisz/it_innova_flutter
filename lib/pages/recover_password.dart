@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:it_innova_flutter/pages/update_password.dart';
+import 'package:it_innova_flutter/services/send_email_service.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class RecoverPassword extends StatefulWidget {
@@ -12,6 +14,8 @@ class RecoverPassword extends StatefulWidget {
 class _RecoverPasswordState extends State<RecoverPassword> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
+
+  SendEmailService service = SendEmailService();
 
   //TODO: Remove function when auth is implemented
   void _enterMockValues() {
@@ -49,26 +53,26 @@ class _RecoverPasswordState extends State<RecoverPassword> {
       onDismiss: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-              builder: (BuildContext context) => UpdatePassword()),
+              builder: (BuildContext context) => UpdatePassword(
+                    email: emailController.text,
+                  )),
         );
       },
     );
   }
 
-  void _sendRecoveryEmail() {
+  void _sendRecoveryEmail() async {
     String inputEmail = emailController.text;
-
-    String mockEmail = 'Caceres@gmail.com';
 
     if (inputEmail.isEmpty) {
       _showEmptyInputDialog();
       return;
     }
-    if (inputEmail == mockEmail) {
-      _showRecoveryEmailSent();
-    } else {
+    Response response = await service.sendEmail(email: inputEmail);
+    if (response.statusCode == 200) _showRecoveryEmailSent();
+    /*else {
       _showIncorrectEmailDialog();
-    }
+    }*/
   }
 
   @override
