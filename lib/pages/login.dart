@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:it_innova_flutter/pages/home.dart';
 import 'package:it_innova_flutter/pages/recover_password.dart';
 import 'package:it_innova_flutter/pages/register.dart';
+import 'package:it_innova_flutter/services/login_service.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class Login extends StatefulWidget {
@@ -16,6 +18,8 @@ class _LoginState extends State<Login> {
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final LoginService service = LoginService();
 
   //TODO: Remove function when auth is implemented
   void _enterMockValues() {
@@ -46,6 +50,15 @@ class _LoginState extends State<Login> {
     );
   }
 
+  void _showUnknownErrorDialog() {
+    oneOptionDialog(
+      context: context,
+      title: 'Al parecer hubo un problema',
+      content:
+          'No pudimos completar su solicitud, intenta nuevamente en breves instantes.',
+    );
+  }
+
   void _login() async {
     String inputUsername = usernameController.text;
     String inputPassword = passwordController.text;
@@ -57,12 +70,17 @@ class _LoginState extends State<Login> {
       _showEmptyInputDialog();
       return;
     }
-    if (inputUsername == mockUsername && inputPassword == mockPassword) {
+    Response response =
+        await service.login(email: inputUsername, password: inputPassword);
+
+    if (response.statusCode == 200) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
       );
-    } else {
+    } else if (response.statusCode == 400) {
       _showIncorrectInputDialog();
+    } else {
+      _showUnknownErrorDialog();
     }
   }
 
