@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class LoginService {
-  Future<Response> login({required String email, password}) async {
-    print(email);
-    print(password);
+  late int patientId;
+  Future<Response> login({
+    required String email,
+    required String password,
+  }) async {
     final body = {
       'email': email,
       'password': password,
@@ -17,6 +19,8 @@ class LoginService {
       },
       body: jsonEncode(body),
     );
+    Map data = jsonDecode(utf8.decode(response.bodyBytes));
+    patientId = int.parse(data['Id']);
     print(response.statusCode);
     return response;
   }
