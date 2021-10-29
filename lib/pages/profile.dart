@@ -3,6 +3,7 @@ import 'package:it_innova_flutter/pages/login.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 import 'package:it_innova_flutter/widgets/two_options_dialog.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -71,8 +72,9 @@ class _ProfileState extends State<Profile> {
     //TODO: Update password
   }
 
-  void _logout() {
-    //TODO: Remove token from SharedPrefs.
+  void _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('patientId');
     pushNewScreen(context, screen: Login(), withNavBar: false);
   }
 

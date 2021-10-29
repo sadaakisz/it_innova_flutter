@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:it_innova_flutter/pages/login.dart';
+import 'package:it_innova_flutter/services/reset_password_service.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
 
 class UpdatePassword extends StatefulWidget {
-  const UpdatePassword({Key? key}) : super(key: key);
+  const UpdatePassword({Key? key, required this.email}) : super(key: key);
+  final String email;
 
   @override
   _UpdatePasswordState createState() => _UpdatePasswordState();
@@ -12,10 +15,14 @@ class UpdatePassword extends StatefulWidget {
 class _UpdatePasswordState extends State<UpdatePassword> {
   final _formKey = GlobalKey<FormState>();
 
+  String get email => widget.email;
+
   final TextEditingController codeController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  ResetPasswordService service = ResetPasswordService();
 
   //TODO: Remove function when auth is implemented
   void _enterMockValues() {
@@ -72,7 +79,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     );
   }
 
-  void _updatePassword() {
+  void _updatePassword() async {
     String inputCode = codeController.text;
     String inputPassword = passwordController.text;
     String inputConfirmPassword = confirmPasswordController.text;
@@ -94,7 +101,9 @@ class _UpdatePasswordState extends State<UpdatePassword> {
       _showWeakPasswordDialog();
       return;
     }
-    _showPasswordUpdated();
+    Response response = await service.resetPassword(
+        email: email, token: inputCode, password: inputPassword);
+    if (response.statusCode == 200) _showPasswordUpdated();
   }
 
   @override

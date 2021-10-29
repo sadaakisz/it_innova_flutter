@@ -71,6 +71,15 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  void _showUnknownErrorDialog() {
+    oneOptionDialog(
+      context: context,
+      title: 'Al parecer hubo un problema',
+      content:
+          'No pudimos completar su solicitud, intenta nuevamente en breves instantes.',
+    );
+  }
+
   void _register() async {
     String inputName = nameController.text;
     String inputSurname = surnameController.text;
@@ -110,6 +119,8 @@ class _RegisterState extends State<Register> {
     if (response.statusCode == 200) {
       print('Registered!');
       Navigator.of(context).pop();
+    } else {
+      _showUnknownErrorDialog();
     }
     //TODO: Already registered accounts is not handled in backend
     /*else {
