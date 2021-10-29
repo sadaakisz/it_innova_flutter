@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_innova_flutter/pages/home.dart';
 import 'package:it_innova_flutter/pages/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,12 @@ _initializeSharedPrefsVariables() async {
   if (!prefs.containsKey('bpmTime')) await prefs.setString('bpmTime', '');
   if (!prefs.containsKey('enabledLocation'))
     await prefs.setBool('enabledLocation', false);
+}
+
+Future<bool> _checkSession() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (prefs.getInt('patientId') != null) return true;
+  return false;
 }
 
 class MyApp extends StatelessWidget {
@@ -35,7 +42,16 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: Home(),
-      home: Login(),
+      home: FutureBuilder<bool>(
+        future: _checkSession(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.data == false) {
+            return Login();
+          } else {
+            return Home();
+          }
+        },
+      ),
     );
   }
 }
