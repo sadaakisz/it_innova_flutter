@@ -39,15 +39,6 @@ class _HeartRateState extends State<HeartRate> {
     }
   }
 
-  final List<HeartRateHistory> _heartRateHistoryList = [
-    HeartRateHistory(bpm: 80, date: '23/04/2021'),
-    HeartRateHistory(bpm: 50, date: '01/05/2021'),
-    HeartRateHistory(bpm: 75, date: '22/05/2021'),
-    HeartRateHistory(bpm: 125, date: '23/05/2021'),
-    HeartRateHistory(bpm: 145, date: '24/05/2021'),
-    HeartRateHistory(bpm: 150, date: '25/05/2021'),
-  ];
-
   @override
   void initState() {
     super.initState();
