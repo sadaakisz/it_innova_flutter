@@ -3,14 +3,17 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:it_innova_flutter/models/heart_rate_history.dart';
 import 'package:it_innova_flutter/util/json_time.dart';
+import 'package:it_innova_flutter/util/patient_id.dart';
 
 class HeartRateService {
   List<HeartRateHistory> hrHistoryList = [];
   late HeartRateHistory heartRateHistory;
   Future<Response> createData() async {
+    final patientId = await PatientId().getId();
     final body = heartRateHistory.toJson();
     Response response = await post(
-      Uri.parse('http://40.76.250.197:8080/ritmo/mobile/12/RitmoCardiaco'),
+      Uri.parse(
+          'http://40.76.250.197:8080/ritmo/mobile/$patientId/RitmoCardiaco'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
