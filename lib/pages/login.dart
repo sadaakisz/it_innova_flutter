@@ -5,6 +5,7 @@ import 'package:it_innova_flutter/pages/recover_password.dart';
 import 'package:it_innova_flutter/pages/register.dart';
 import 'package:it_innova_flutter/services/login_service.dart';
 import 'package:it_innova_flutter/widgets/one_option_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -74,6 +75,8 @@ class _LoginState extends State<Login> {
         await service.login(email: inputUsername, password: inputPassword);
 
     if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('patientId', service.patientId);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
       );
