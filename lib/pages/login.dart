@@ -26,8 +26,8 @@ class _LoginState extends State<Login> {
   void _enterMockValues() {
     setState(() {
       if (usernameController.text.isEmpty) {
-        usernameController.text = 'Caceres@gmail.com';
-        passwordController.text = '*Caceres123';
+        usernameController.text = 'guiterrez012@gmail.com';
+        passwordController.text = '1234567';
       } else {
         usernameController.clear();
         passwordController.clear();
@@ -63,9 +63,6 @@ class _LoginState extends State<Login> {
   void _login() async {
     String inputUsername = usernameController.text;
     String inputPassword = passwordController.text;
-
-    String mockUsername = 'Caceres@gmail.com';
-    String mockPassword = '*Caceres123';
 
     if (inputUsername.isEmpty || inputPassword.isEmpty) {
       _showEmptyInputDialog();
