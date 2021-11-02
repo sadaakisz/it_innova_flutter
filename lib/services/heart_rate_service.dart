@@ -26,7 +26,7 @@ class HeartRateService {
   Future<void> getData() async {
     hrHistoryList.clear();
     Response response = await get(
-      Uri.parse('http://40.76.250.197:8080/ritmo/mobile/12/RitmoCardiaco'),
+      Uri.parse('http://40.76.250.197:8080/ritmo/mobile/$patientId/RitmoCardiaco'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
