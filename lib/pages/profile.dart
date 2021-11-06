@@ -96,6 +96,13 @@ class _ProfileState extends State<Profile> {
     service.patientInfo = patientInfo;
     service.modifyData();
     _showProfileUpdated();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('patientId', patientId);
+    await prefs.setString('patientName', inputName);
+    await prefs.setString('patientLastName', inputSurname);
+    await prefs.setString('patientEmail', inputEmail);
+    await prefs.setString('patientPassword', inputPassword);
   }
 
   void _logout() async {
