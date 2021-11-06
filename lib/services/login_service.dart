@@ -4,6 +4,10 @@ import 'package:http/http.dart';
 
 class LoginService {
   late int patientId;
+  late String patientName;
+  late String patientLastName;
+  late String patientEmail;
+  late String patientPassword;
   Future<Response> login({
     required String email,
     required String password,
@@ -20,7 +24,13 @@ class LoginService {
       body: jsonEncode(body),
     );
     Map data = jsonDecode(utf8.decode(response.bodyBytes));
-    if (response.statusCode == 200) patientId = int.parse(data['Id']);
+    if (response.statusCode == 200) {
+      patientId = int.parse(data['Id']);
+      patientName = data['name'];
+      patientLastName = data['lastName'];
+      patientEmail = data['email'];
+      patientPassword = data['password'];
+    }
     print(response.statusCode);
     return response;
   }

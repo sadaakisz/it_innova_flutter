@@ -74,6 +74,10 @@ class _LoginState extends State<Login> {
     if (response.statusCode == 200) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setInt('patientId', service.patientId);
+      await prefs.setString('patientName', service.patientName);
+      await prefs.setString('patientLastName', service.patientLastName);
+      await prefs.setString('patientEmail', service.patientEmail);
+      await prefs.setString('patientPassword', service.patientPassword);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
       );
