@@ -16,8 +16,10 @@ class AlertListView extends StatelessWidget {
       itemCount: _alertHistoryList.length,
       itemBuilder: (BuildContext context, int index) {
         var alertItem = _alertHistoryList[index];
+        var name = alertItem.name;
+        var bpm = alertItem.heartRate;
         return ListTile(
-          title: Text(alertItem.name),
+          title: Text("$name - $bpm BPM"),
           subtitle: Text(alertItem.date),
         );
       },
