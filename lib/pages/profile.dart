@@ -201,7 +201,6 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         ElevatedButton(
-                          //TODO: Implement form submission
                           onPressed: () {
                             if (_formKey.currentState!.validate())
                               _updateProfile();
@@ -213,8 +212,11 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         ElevatedButton(
-                          //TODO: Implement form dismiss (revert)
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              getProfileInfo();
+                            });
+                          },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 8.0),

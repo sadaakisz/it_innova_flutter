@@ -16,7 +16,7 @@ class _WearableListState extends State<WearableList> {
   BluetoothDevice? _connectedDevice;
   List<BluetoothService> _services =
       List<BluetoothService>.empty(growable: true);
-  _addDeviceTolist(final BluetoothDevice device) {
+  _addDeviceToList(final BluetoothDevice device) {
     if (!widget.devicesList.contains(device)) {
       setState(() {
         widget.devicesList.add(device);
@@ -31,12 +31,12 @@ class _WearableListState extends State<WearableList> {
         .asStream()
         .listen((List<BluetoothDevice> devices) {
       for (BluetoothDevice device in devices) {
-        _addDeviceTolist(device);
+        _addDeviceToList(device);
       }
     });
     widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
-        _addDeviceTolist(result.device);
+        _addDeviceToList(result.device);
       }
     });
     widget.flutterBlue.startScan();

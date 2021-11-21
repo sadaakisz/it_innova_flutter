@@ -24,21 +24,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
 
   ResetPasswordService service = ResetPasswordService();
 
-  //TODO: Remove function when auth is implemented
-  void _enterMockValues() {
-    setState(() {
-      if (codeController.text.isEmpty) {
-        codeController.text = '123498';
-        passwordController.text = '*Caceres123';
-        confirmPasswordController.text = '*Caceres123';
-      } else {
-        codeController.clear();
-        passwordController.clear();
-        confirmPasswordController.clear();
-      }
-    });
-  }
-
   void _showEmptyInputDialog() {
     oneOptionDialog(
       context: context,
@@ -111,12 +96,9 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: GestureDetector(
-          onTap: () => _enterMockValues(),
-          child: Text(
-            'Actualizar contraseña',
-            style: TextStyle(color: Colors.black87),
-          ),
+        title: Text(
+          'Actualizar contraseña',
+          style: TextStyle(color: Colors.black87),
         ),
         iconTheme: IconThemeData(color: Colors.black87),
       ),

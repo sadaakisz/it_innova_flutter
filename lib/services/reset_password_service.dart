@@ -8,9 +8,6 @@ class ResetPasswordService {
     required String token,
     required String password,
   }) async {
-    print(email);
-    print(token);
-    print(password);
     final body = {
       'email': email,
       'token': token,

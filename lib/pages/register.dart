@@ -88,9 +88,6 @@ class _RegisterState extends State<Register> {
     String inputPassword = passwordController.text;
     String inputConfirmPassword = confirmPasswordController.text;
 
-    String mockRegisteredEmail =
-        'Caceres@gmail.com'; // Would be managed by the request status
-
     if (inputName.isEmpty ||
         inputSurname.isEmpty ||
         inputEmail.isEmpty ||
