@@ -17,17 +17,6 @@ class _RecoverPasswordState extends State<RecoverPassword> {
 
   SendEmailService service = SendEmailService();
 
-  //TODO: Remove function when auth is implemented
-  void _enterMockValues() {
-    setState(() {
-      if (emailController.text.isEmpty) {
-        emailController.text = 'Caceres@gmail.com';
-      } else {
-        emailController.clear();
-      }
-    });
-  }
-
   void _showEmptyInputDialog() {
     oneOptionDialog(
       context: context,
@@ -36,6 +25,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
     );
   }
 
+  // Email checkup is absent in backend. Leaving this function if implemented in the future.
   void _showIncorrectEmailDialog() {
     oneOptionDialog(
       context: context,
@@ -80,12 +70,9 @@ class _RecoverPasswordState extends State<RecoverPassword> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: GestureDetector(
-          onTap: () => _enterMockValues(),
-          child: Text(
-            'Recuperar contraseña',
-            style: TextStyle(color: Colors.black87),
-          ),
+        title: Text(
+          'Recuperar contraseña',
+          style: TextStyle(color: Colors.black87),
         ),
         iconTheme: IconThemeData(color: Colors.black87),
       ),
